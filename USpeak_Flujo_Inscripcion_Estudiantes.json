@@ -1,0 +1,265 @@
+{
+  "name": "USpeak Flujo Inscripción Estudiantes",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "79a2e24b-cfdb-4bba-954a-1f4da06be394",
+                    "leftValue": "={{ $json.Nivel }}",
+                    "rightValue": "Básico",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Nivel Básico"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c824ccaa-b446-4f7b-b2ee-eb33dc9c06f2",
+                    "leftValue": "={{ $json.Nivel }}",
+                    "rightValue": "Intermedio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Nivel Intermedio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "029a63aa-0646-42c3-8569-247ce3c03835",
+                    "leftValue": "={{ $json.Nivel }}",
+                    "rightValue": "Avanzado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Nivel Avanzado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [64, 0],
+      "id": "14d63795-00a6-4852-9f35-83bdf25192b7",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Switch').item.json['Email '] }}",
+        "subject": "=Inscripción USpeak",
+        "emailType": "text",
+        "message": "=Hola {{ $('Switch').item.json.Nombre }},\n\nTu inscripción ha sido confirmada.\n\nEstas en Nivel {{ $('Switch').item.json.Nivel }}.Tus clases serán los días {{ $json.Horario }}.\n\nEste es el link de tu sala de clases:{{ $json.LinkZoom }}.\n\n\nTe esperamos.",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [768, 16],
+      "id": "eef4e1ad-b5eb-4dff-ba0e-efdb546dfea6",
+      "name": "Send a message",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "370fdb77-0d03-4663-87c1-4d82aa0ce74a",
+              "name": "LinkZoom",
+              "value": "https://zoom.us/j/basico",
+              "type": "string"
+            },
+            {
+              "id": "bad96926-1218-4eca-ba05-b4ff104463a6",
+              "name": "Horario",
+              "value": "Lunes, Miércoles y Viernes de 18:00 a 19:30",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [400, -224],
+      "id": "830fcff1-498e-49a6-a428-05e5e1f11eac",
+      "name": "Horario/Link Básico"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "370fdb77-0d03-4663-87c1-4d82aa0ce74a",
+              "name": "LinkZoom",
+              "value": "https://zoom.us/j/intermedio",
+              "type": "string"
+            },
+            {
+              "id": "bad96926-1218-4eca-ba05-b4ff104463a6",
+              "name": "Horario",
+              "value": "Martes, Jueves y Sábados de 18:00 a 19:30",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [400, 16],
+      "id": "1d7fe2ed-01cc-400b-ab1d-64ce50f1ce2f",
+      "name": "Horario/Link Intermedio"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "370fdb77-0d03-4663-87c1-4d82aa0ce74a",
+              "name": "LinkZoom",
+              "value": "https://zoom.us/j/avanzado",
+              "type": "string"
+            },
+            {
+              "id": "bad96926-1218-4eca-ba05-b4ff104463a6",
+              "name": "Horario",
+              "value": "Martes, Jueves y Sábados de 19:00 a 20:30",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [400, 288],
+      "id": "31375d6c-0a3a-4e7a-b555-e67d8d48fa6c",
+      "name": "Horario/Link Avanzado"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Inscripciones USpeak",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [-192, 16],
+      "id": "b6810004-d403-4f95-adcb-ac20cc690bd3",
+      "name": "Llega info del interesado desde Google Forms",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "YOUR_SHEETS_TRIGGER_CREDENTIAL_ID",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Switch": {
+      "main": [
+        [{"node": "Horario/Link Básico", "type": "main", "index": 0}],
+        [{"node": "Horario/Link Intermedio", "type": "main", "index": 0}],
+        [{"node": "Horario/Link Avanzado", "type": "main", "index": 0}]
+      ]
+    },
+    "Horario/Link Básico": {
+      "main": [[{"node": "Send a message", "type": "main", "index": 0}]]
+    },
+    "Horario/Link Intermedio": {
+      "main": [[{"node": "Send a message", "type": "main", "index": 0}]]
+    },
+    "Horario/Link Avanzado": {
+      "main": [[{"node": "Send a message", "type": "main", "index": 0}]]
+    },
+    "Llega info del interesado desde Google Forms": {
+      "main": [[{"node": "Switch", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "YOUR_VERSION_ID",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "YOUR_INSTANCE_ID"
+  },
+  "id": "YOUR_WORKFLOW_ID",
+  "tags": []
+}
