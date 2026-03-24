@@ -1,6 +1,6 @@
 # Proyectos n8n
 
-Automatizaciones desarrolladas en n8n para la Academia USpeak, como parte del curso de automatización de procesos. Incluye análisis de negocio, diagramas AS-IS / TO-BE y cálculo de ROI.
+Automatizaciones desarrolladas en n8n, como parte del curso de automatización de procesos. Incluye análisis de negocio, diagramas AS-IS / TO-BE y cálculo de ROI.
 
 ---
 
