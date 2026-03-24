@@ -50,7 +50,7 @@ Se identificaron **4 stakeholders principales** con distintos niveles de poder e
 ### 1. Flujo de Inscripción de Estudiantes
 Automatiza el proceso completo desde que un prospecto llena el formulario hasta que recibe su correo de bienvenida con horario y link de Zoom.
 
-**Archivo:** `USpeak_Flujo_Inscripcion_Estudiantes_SANITIZED.json`
+**Archivo:** `USpeak_Flujo_Inscripcion_Estudiantes.json`
 
 **Flujo:**
 1. `Google Sheets Trigger` — detecta nueva fila al llegar un formulario
@@ -63,7 +63,7 @@ Automatiza el proceso completo desde que un prospecto llena el formulario hasta 
 ### 2. Recordatorio de Pago
 Envía automáticamente recordatorios de cobro a todos los alumnos con pago pendiente, el día 28 de cada mes.
 
-**Archivo:** `USpeak_Recordatorio_de_Pago_SANITIZED.json`
+**Archivo:** `USpeak_Recordatorio_de_Pago.json`
 
 **Flujo:**
 1. `Schedule Trigger` — se activa el día 28 de cada mes a las 9:00 AM
@@ -76,7 +76,7 @@ Envía automáticamente recordatorios de cobro a todos los alumnos con pago pend
 ### 3. Respaldo de Comprobantes de Pago
 Procesa automáticamente los comprobantes que los alumnos envían por correo, los respalda en Drive y actualiza el estado de pago en la planilla.
 
-**Archivo:** `USpeak_Respaldo_de_Pagos_SANITIZED.json`
+**Archivo:** `USpeak_Respaldo_de_Pagos.json`
 
 **Flujo:**
 1. `Gmail Trigger` — detecta correos entrantes con adjuntos
